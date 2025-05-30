@@ -141,7 +141,7 @@ class _VoiceMessageState extends State<VoiceMessage>
               SizedBox(width: 2.2.w()),
 
               /// x2 button will be added here.
-              // _speed(context),
+              _speed(context),
             ],
           ),
         ),
@@ -279,22 +279,22 @@ class _VoiceMessageState extends State<VoiceMessage>
     );
   }
 
-  // _speed(BuildContext context) => InkWell(
-  //       onTap: () => _toggle2x(),
-  //       child: Container(
-  //         alignment: Alignment.center,
-  //         padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.6.w),
-  //         decoration: BoxDecoration(
-  //           borderRadius: BorderRadius.circular(2.8.w),
-  //           color: widget.meFgColor.withOpacity(.28),
-  //         ),
-  //         width: 9.8.w,
-  //         child: Text(
-  //           !x2 ? '1X' : '2X',
-  //           style: TextStyle(fontSize: 9.8, color: widget.meFgColor),
-  //         ),
-  //       ),
-  //     );
+  InkWell _speed(BuildContext context) => InkWell(
+        onTap: () => _toggle2x(),
+        child: Container(
+          alignment: Alignment.center,
+          padding: EdgeInsets.symmetric(horizontal: 3.w(), vertical: 1.6.w()),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(2.8.w()),
+            color: widget.meFgColor.withOpacity(.28),
+          ),
+          width: 9.8.w(),
+          child: Text(
+            !x2 ? '1X' : '2X',
+            style: TextStyle(fontSize: 9.8, color: widget.meFgColor),
+          ),
+        ),
+      );
 
   void _startPlaying() async {
     if (widget.audioFile != null) {
@@ -358,13 +358,13 @@ class _VoiceMessageState extends State<VoiceMessage>
   void _completeAnimationConfiguration() =>
       setState(() => _audioConfigurationDone = true);
 
-  // void _toggle2x() {
-  //   x2 = !x2;
-  //   _controller!.duration = Duration(seconds: x2 ? duration ~/ 2 : duration);
-  //   if (_controller!.isAnimating) _controller!.forward();
-  //   _player.setPlaybackRate(x2 ? 2 : 1);
-  //   setState(() {});
-  // }
+  void _toggle2x() {
+    x2 = !x2;
+    _controller!.duration = Duration(seconds: x2 ? duration ~/ 2 : duration);
+    if (_controller!.isAnimating) _controller!.forward();
+    _player.setPlaybackRate(x2 ? 2 : 1);
+    setState(() {});
+  }
 
   void _changePlayingStatus() async {
     if (widget.onPlay != null) widget.onPlay!();
