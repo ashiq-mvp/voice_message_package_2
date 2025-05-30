@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 // ignore: library_prefixes
 import 'package:just_audio/just_audio.dart' as jsAudio;
 import 'package:voice_message_package_2/src/contact_noises.dart';
+import 'package:voice_message_package_2/src/helpers/formatter.dart';
 import 'package:voice_message_package_2/src/helpers/utils.dart';
 
 import './noises.dart';
@@ -96,7 +97,7 @@ class _VoiceMessageState extends State<VoiceMessage>
           _player.seek(const Duration(milliseconds: 0));
           setState(() {
             duration = _audioDuration!.inMilliseconds;
-            _remainingTime = widget.formatDuration!(_audioDuration!);
+            _remainingTime = formatDuration(_audioDuration!);
           });
           break;
         default:
@@ -105,7 +106,7 @@ class _VoiceMessageState extends State<VoiceMessage>
     });
     _player.onPositionChanged.listen(
       (Duration p) => setState(
-        () => _remainingTime = p.toString().substring(2, 11),
+        () => _remainingTime = formatDuration(p),
       ),
     );
   }
@@ -136,7 +137,7 @@ class _VoiceMessageState extends State<VoiceMessage>
             children: [
               _playButton(context),
               SizedBox(width: 3.w()),
-              _durationWithNoise(context),
+              Expanded(child: _durationWithNoise(context)),
               SizedBox(width: 2.2.w()),
 
               /// x2 button will be added here.
@@ -196,7 +197,7 @@ class _VoiceMessageState extends State<VoiceMessage>
                 Padding(
                   padding: EdgeInsets.only(left: 1.2.w()),
                   child: Text(
-                    widget.formatDuration!(widget.duration!),
+                    formatDuration(widget.duration!),
                     style: TextStyle(
                       fontSize: 10,
                       color:
