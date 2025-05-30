@@ -136,9 +136,9 @@ class _VoiceMessageState extends State<VoiceMessage>
             mainAxisSize: MainAxisSize.min,
             children: [
               _playButton(context),
-              SizedBox(width: 3.w()),
+              SizedBox(width: 5),
               Expanded(child: _durationWithNoise(context)),
-              SizedBox(width: 2.2.w()),
+              SizedBox(width: 5),
 
               /// x2 button will be added here.
               _speed(context),
@@ -253,8 +253,8 @@ class _VoiceMessageState extends State<VoiceMessage>
                       width: noiseWidth,
                       height: 6.w(),
                       color: widget.me
-                          ? widget.meBgColor.withOpacity(.4)
-                          : widget.contactBgColor.withOpacity(.35),
+                          ? widget.meBgColor.withValues(alpha: .4)
+                          : widget.contactBgColor.withValues(alpha: .35),
                     ),
                   );
                 },
@@ -263,7 +263,7 @@ class _VoiceMessageState extends State<VoiceMessage>
               opacity: .0,
               child: Container(
                 width: noiseWidth,
-                color: Colors.amber.withOpacity(0),
+                color: Colors.amber.withValues(alpha: 0),
                 child: Slider(
                   min: 0.0,
                   max: maxDurationForSlider,
@@ -286,7 +286,7 @@ class _VoiceMessageState extends State<VoiceMessage>
           padding: EdgeInsets.symmetric(horizontal: 3.w(), vertical: 1.6.w()),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(2.8.w()),
-            color: widget.meFgColor.withOpacity(.28),
+            color: widget.meFgColor.withValues(alpha: .28),
           ),
           width: 9.8.w(),
           child: Text(
