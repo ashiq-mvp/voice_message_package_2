@@ -8,7 +8,6 @@ import 'package:just_audio/just_audio.dart' as jsAudio;
 import 'package:voice_message_package_2/src/contact_noises.dart';
 import 'package:voice_message_package_2/src/helpers/utils.dart';
 
-import './helpers/widgets.dart';
 import './noises.dart';
 import 'helpers/colors.dart';
 
@@ -188,9 +187,9 @@ class _VoiceMessageState extends State<VoiceMessage>
           Row(
             children: [
               /// show played badge
-              if (!widget.played)
-                Widgets.circle(context, 1.5.w(),
-                    widget.me ? widget.meFgColor : widget.contactCircleColor),
+              // if (!widget.played)
+              //   Widgets.circle(context, 1.5.w(),
+              //       widget.me ? widget.meFgColor : widget.contactCircleColor),
 
               /// show duration
               if (widget.showDuration)
