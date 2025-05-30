@@ -5,8 +5,8 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 // ignore: library_prefixes
 import 'package:just_audio/just_audio.dart' as jsAudio;
-import 'package:voice_message_package/src/contact_noises.dart';
-import 'package:voice_message_package/src/helpers/utils.dart';
+import 'package:voice_message_package_2/src/contact_noises.dart';
+import 'package:voice_message_package_2/src/helpers/utils.dart';
 
 import './helpers/widgets.dart';
 import './noises.dart';
@@ -16,7 +16,7 @@ import 'helpers/colors.dart';
 // ignore: must_be_immutable
 class VoiceMessage extends StatefulWidget {
   VoiceMessage({
-    Key? key,
+    super.key,
     required this.me,
     this.audioSrc,
     this.audioFile,
@@ -36,7 +36,7 @@ class VoiceMessage extends StatefulWidget {
     this.meFgColor = const Color(0xffffffff),
     this.played = false,
     this.onPlay,
-  }) : super(key: key);
+  });
 
   final String? audioSrc;
   Future<File>? audioFile;
@@ -307,7 +307,7 @@ class _VoiceMessageState extends State<VoiceMessage>
     _controller!.forward();
   }
 
-  _stopPlaying() async {
+  Future<void> _stopPlaying() async {
     await _player.pause();
     _controller!.stop();
   }
@@ -315,7 +315,8 @@ class _VoiceMessageState extends State<VoiceMessage>
   void _setDuration() async {
     if (widget.duration != null) {
       _audioDuration = widget.duration;
-    }  if (widget.audioFile != null)  {
+    }
+    if (widget.audioFile != null) {
       String path = (await widget.audioFile!).path;
       _audioDuration = await jsAudio.AudioPlayer().setFilePath(path);
     } else {
@@ -345,7 +346,7 @@ class _VoiceMessageState extends State<VoiceMessage>
   }
 
   void _setAnimationConfiguration(Duration audioDuration) async {
-    if(widget.formatDuration != null){
+    if (widget.formatDuration != null) {
       setState(() {
         _remainingTime = widget.formatDuration!(audioDuration);
       });
@@ -380,7 +381,7 @@ class _VoiceMessageState extends State<VoiceMessage>
   }
 
   ///
-  _onChangeSlider(double d) async {
+  Future<void> _onChangeSlider(double d) async {
     if (_isPlaying) _changePlayingStatus();
     duration = d.round();
     _controller?.value = (noiseWidth) * duration / maxDurationForSlider;

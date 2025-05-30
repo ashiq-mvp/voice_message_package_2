@@ -1,11 +1,11 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:voice_message_package/src/helpers/utils.dart';
+import 'package:voice_message_package_2/src/helpers/utils.dart';
 
 /// document will be added
 class ContactNoise extends StatelessWidget {
-  const ContactNoise({Key? key}) : super(key: key);
+  const ContactNoise({super.key});
 
   @override
   Widget build(BuildContext context) {
