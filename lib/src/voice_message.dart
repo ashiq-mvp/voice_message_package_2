@@ -72,7 +72,7 @@ class _VoiceMessageState extends State<VoiceMessage>
   double maxDurationForSlider = .0000001;
   bool _isPlaying = false, x2 = false, _audioConfigurationDone = false;
   int duration = 00;
-  String _remainingTime = '';
+  Duration _remainingTime = Duration();
   AnimationController? _controller;
 
   @override
@@ -97,7 +97,7 @@ class _VoiceMessageState extends State<VoiceMessage>
           _player.seek(const Duration(milliseconds: 0));
           setState(() {
             duration = _audioDuration!.inMilliseconds;
-            _remainingTime = formatDuration(_audioDuration!);
+            _remainingTime = _audioDuration!;
           });
           break;
         default:
@@ -106,7 +106,7 @@ class _VoiceMessageState extends State<VoiceMessage>
     });
     _player.onPositionChanged.listen(
       (Duration p) => setState(
-        () => _remainingTime = formatDuration(p),
+        () => _remainingTime = p,
       ),
     );
   }
@@ -209,7 +209,7 @@ class _VoiceMessageState extends State<VoiceMessage>
               SizedBox(
                 width: 50,
                 child: Text(
-                  _remainingTime,
+                  formatDuration(_remainingTime),
                   style: TextStyle(
                     fontSize: 10,
                     color: widget.me ? widget.meFgColor : widget.contactFgColor,
@@ -348,7 +348,7 @@ class _VoiceMessageState extends State<VoiceMessage>
   void _setAnimationConfiguration(Duration audioDuration) async {
     if (widget.formatDuration != null) {
       setState(() {
-        _remainingTime = widget.formatDuration!(audioDuration);
+        _remainingTime = audioDuration;
       });
     }
     debugPrint("_setAnimationConfiguration $_remainingTime");
@@ -385,7 +385,7 @@ class _VoiceMessageState extends State<VoiceMessage>
     if (_isPlaying) _changePlayingStatus();
     duration = d.round();
     _controller?.value = (noiseWidth) * duration / maxDurationForSlider;
-    _remainingTime = widget.formatDuration!(_audioDuration!);
+    _remainingTime = _audioDuration!;
     await _player.seek(Duration(milliseconds: duration));
     setState(() {});
   }
