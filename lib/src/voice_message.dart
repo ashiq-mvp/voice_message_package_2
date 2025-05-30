@@ -136,9 +136,9 @@ class _VoiceMessageState extends State<VoiceMessage>
             mainAxisSize: MainAxisSize.min,
             children: [
               _playButton(context),
-              SizedBox(width: 5),
-              Expanded(child: _durationWithNoise(context)),
-              SizedBox(width: 5),
+              SizedBox(width: 3.w()),
+              Flexible(child: _durationWithNoise(context)),
+              SizedBox(width: 2.2.w()),
 
               /// x2 button will be added here.
               _speed(context),
